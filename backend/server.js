@@ -6,6 +6,7 @@ import { connectMongoDB } from "./db/connectMongoDB.js";
 import cookieParser from "cookie-parser";
 import userrouter from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
+import notificationRoutes from "./routes/notification.route.js"
 import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
@@ -24,6 +25,7 @@ const port = process.env.PORT || 5000;
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userrouter);
 app.use("/api/post", postRoutes);
+app.use("/api/routes",notificationRoutes)
 app.listen(port, () => {
   console.log("port running at ", port);
   connectMongoDB();
