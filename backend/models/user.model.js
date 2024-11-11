@@ -24,14 +24,14 @@ const userSchema = new mongoose.Schema(
     },
     followers: [
       {
-        type: mongoose.Schema.Types.ObjectId, // 16 characters 123
+        type: mongoose.Schema.Types.ObjectId, 
         ref: "User",
         default: [],
       },
     ],
     following: [
       {
-        type: mongoose.Schema.Types.ObjectId, // 16 characters 123
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         default: [],
       },
@@ -40,6 +40,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    coverImg: {
+      type: String,
+      default: "",
+    },
+    bio: {
+      type: String,
+      default: "",
+    },
+    link: {
+      type: String,
+      default: "",
+    },
   },
-  { timestamps: ture }
+  { timestamps: true }
 );
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
