@@ -1,5 +1,7 @@
 import User from "../models/user.model.js";
 import Notification from "../models/notification.model.js";
+import { v2 as cloudinary } from "cloudinary";
+
 export const getUserProfile = async (req, res) => {
   const { username } = req.params;
 
@@ -154,3 +156,4 @@ export const updateUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
