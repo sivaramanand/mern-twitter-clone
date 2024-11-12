@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon backend/server.js",
     "start": "NODE_ENV=production node backend/server.js",
-    "build": "npm install && npm install --prefix frontend && cd frontend && npx vite build"
+    "build": "npm install && npm install --prefix frontend && cd frontend"
   },
   "author": "",
   "license": "ISC",
