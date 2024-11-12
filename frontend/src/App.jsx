@@ -1,27 +1,64 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { QueryClient , QueryClientProvider } from "@tanstack/react-query";
+
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/auth/login/LoginPage";
-import SignupPage from "./pages/auth/signup/SignupPage";
-import Sidebar from "./components/common/Sidebar";
-import Rightpannel from "./components/common/RightPanel";
-function App() {
-  const [count, setCount] = useState(0);
+import SignUpPage from "./pages/auth/signup/SignUpPage";
+import NotificationPage from "./pages/notification/NotificationPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
-  return (
-    <div div className="flex max-w-6xl mx-auto">
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-      </Routes>
-      <Rightpannel />
-    </div>
-  );
+import Sidebar from "./components/common/Sidebar";
+import RightPanel from "./components/common/RightPanel";
+
+import { Toaster } from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "./components/common/LoadingSpinner";
+
+
+const queryClient = new QueryClient();
+
+function App() {
+	const { data: authUser, isLoading } = useQuery({
+		queryKey: ["authUser"],
+		queryFn: async () => {
+			try {
+				const res = await fetch("/api/auth/me");
+				const data = await res.json();
+				if (data.error) return null;
+				if (!res.ok) {
+					throw new Error(data.error || "Something went wrong");
+				}
+				console.log("authUser is here:", data);
+				return data;
+			} catch (error) {
+				throw new Error(error);
+			}
+		},
+		retry: false,
+	});
+
+	if (isLoading) {
+		return (
+			<div className='h-screen flex justify-center items-center'>
+				<LoadingSpinner size='lg' />
+			</div>
+		);
+	}
+
+	return (
+		<div className='flex max-w-6xl mx-auto'>
+			{authUser && <Sidebar />}
+			<Routes>
+				<Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
+				<Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
+				<Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/' />} />
+				<Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to='/login' />} />
+				<Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
+			</Routes>
+			{authUser && <RightPanel />}
+			<Toaster />
+		</div>
+	);
 }
 
 export default App;
