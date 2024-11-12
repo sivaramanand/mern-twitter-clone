@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon backend/server.js",
     "start": "NODE_ENV=production node backend/server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install && npm install --prefix frontend && cd frontend && npx vite build"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +22,6 @@
     "mongodb": "^6.10.0",
     "mongoose": "^8.7.2",
     "nodemon": "^3.1.7"
-
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
