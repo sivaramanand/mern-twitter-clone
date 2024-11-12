@@ -9,6 +9,12 @@ import userrouter from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import notificationRoutes from "./routes/notification.route.js";
 import { v2 as cloudinary } from "cloudinary";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+console.log(__filename);
+console.log(__dirname);
 
 dotenv.config();
 
@@ -17,6 +23,7 @@ cloudinary.config({
   api_key: process.env.api_key,
   api_secret: process.env.api_secret,
 });
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,6 +44,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(port, () => {
-  console.log("port running at ", port);
+  console.log("Server running on port", port);
   connectMongoDB();
 });

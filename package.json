@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon backend/server.cjs",
-    "start": "NODE_ENV=production node backend/server.cjs",
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js",
     "build": "npm install && npm install --prefix frontend && cd frontend"
   },
   "author": "",
