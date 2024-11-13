@@ -1,5 +1,6 @@
 import express from "express";
-import path from 'node:path';
+import path from "node:path";
+import http from "http";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import { connectMongoDB } from "./db/connectMongoDB.js";
@@ -9,6 +10,7 @@ import postRoutes from "./routes/post.routes.js";
 import notificationRoutes from "./routes/notification.route.js";
 import { v2 as cloudinary } from "cloudinary";
 import { fileURLToPath } from "url";
+import cors from "cors"; 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +26,14 @@ cloudinary.config({
 });
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ["https://twitter-mern-twitter-siva.onrender.com"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -35,7 +45,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/routes", notificationRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
