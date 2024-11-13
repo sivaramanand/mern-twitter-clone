@@ -5,7 +5,7 @@ import { generateTokenAndSetCookie } from "../lib/utils/generateToken.js";
 
 export const signup = async (req, res) => {
   try {
-    const { fullname, username, email, password } = req.body;
+    const { fullName, username, email, password } = req.body;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: "Invalud email format" });
@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newuser = new User({
-      fullname: fullname,
+      fullName: fullName,
       username: username,
       email: email,
       password: hashedPassword,
@@ -42,7 +42,7 @@ export const signup = async (req, res) => {
 
       res.status(201).json({
         _id: newuser._id,
-        fullname: newuser.fullname,
+        fullName: newuser.fullName,
         username: newuser.username,
         email: newuser.email,
         followers: newuser.followers,
@@ -77,7 +77,7 @@ export const login = async (req, res) => {
     generateTokenAndSetCookie(user._id, res);
     res.status(200).json({
       _id: user._id,
-      fullname: user.fullname,
+      fullName: user.fullName,
       username: user.username,
       email: user.email,
       followers: user.followers,
