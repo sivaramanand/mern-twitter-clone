@@ -33,7 +33,6 @@ const SignUpPage = () => {
 
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Failed to create account");
-        console.log(data);
         return data;
       } catch (error) {
         console.error(error);
@@ -44,14 +43,13 @@ const SignUpPage = () => {
       toast.success("Account created successfully");
 
       {
-        /* Added this line below, after recording the video. I forgot to add this while recording, sorry, thx. */
       }
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // page won't reload
+    e.preventDefault();
     mutate(formData);
   };
 
