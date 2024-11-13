@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon backend/server.js",
-    "start": "node backend/server.js",
-    "build": "npm install && npm install --prefix frontend && cd frontend"
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "build": "npm install && cd frontend && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -21,9 +21,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
     "mongoose": "^8.7.2",
-    "nodemon": "^3.1.7"
-  },
-  "devDependencies": {
     "nodemon": "^3.1.7"
   }
 }
