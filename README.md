@@ -1,4 +1,4 @@
-the environment variables are
+the environment variables for the .env files are-
 
 MONGODB_URI=
 
