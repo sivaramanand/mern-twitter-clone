@@ -60,10 +60,7 @@ const Post = ({ post }) => {
 			}
 		},
 		onSuccess: (updatedLikes) => {
-			// this is not the best UX, bc it will refetch all posts
-			// queryClient.invalidateQueries({ queryKey: ["posts"] });
-
-			// instead, update the cache directly for that post
+		
 			queryClient.setQueryData(["posts"], (oldData) => {
 				return oldData.map((p) => {
 					if (p._id === post._id) {
@@ -172,7 +169,6 @@ const Post = ({ post }) => {
 									{post.comments.length}
 								</span>
 							</div>
-							{/* We're using Modal Component from DaisyUI */}
 							<dialog id={`comments_modal${post._id}`} className='modal border-none outline-none'>
 								<div className='modal-box rounded border border-gray-600'>
 									<h3 className='font-bold text-lg mb-4'>COMMENTS</h3>

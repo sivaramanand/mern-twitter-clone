@@ -3,7 +3,7 @@ import { QueryClient , QueryClientProvider } from "@tanstack/react-query";
 
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/auth/login/LoginPage";
-import SignUpPage from "./pages/auth/signup/SignUpPage";
+import SignUpPage from "./pages/auth/signup/SignupPage";
 import NotificationPage from "./pages/notification/NotificationPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 
@@ -28,7 +28,6 @@ function App() {
 				if (!res.ok) {
 					throw new Error(data.error || "Something went wrong");
 				}
-				console.log("authUser is here:", data);
 				return data;
 			} catch (error) {
 				throw new Error(error);
