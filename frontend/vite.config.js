@@ -7,7 +7,7 @@ export default defineConfig({
 		port: 3000,
 		proxy: {
 			"/api": {
-				target: "https://mern-twitter-clone-siva.onrender.com",
+				target: "https://twitter-mern-twitter-siva.onrender.com",
 				changeOrigin: true,
 			},
 		},
