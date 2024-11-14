@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import useFollow from "../../hooks/useFollow";
 
-import RightPanelSkeleton from "../skeletons/RightPanelSkeleton";
+import RightPanelSkeleton from "../skeletons/RightPanelSkeletion";
 import LoadingSpinner from "./LoadingSpinner";
 
 const RightPanel = () => {
